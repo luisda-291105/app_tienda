@@ -54,10 +54,17 @@ class Login {
                 );
                 if (usuariosEncontrados) {
                     window.location.href = "index.html";
+                    MostrarUsuarioDashboard(usuariosEncontrados)
                 } else {}
             }
         } catch (error) {
             console.error(error);
         }
     }
+}
+
+function MostrarUsuarioDashboard(user){
+    console.log("usuario que inicio seccion");
+    console.table(user)
+    localStorage.setItem("userFound" , JSON.stringify(user))
 }
