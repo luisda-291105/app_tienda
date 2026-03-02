@@ -17,8 +17,8 @@ if (btnLogin) {
     btnLogin.addEventListener("click", () => {
         let login = new Login();
         console.log(inputEmail.value);
-        
-        login.valideUserLogin(inputEmail.value)
+
+        login.valideUserLogin(inputEmail.value, inputPassword.value);
     });
 }
 
@@ -42,21 +42,18 @@ class Login {
     }
 
     // funcion que valida el email y pass ingresados con los ya registrados
-    valideUserLogin(email) {
+    valideUserLogin(email, pass) {
         try {
-            console.log("email recibido " , email);
-            
-            if (email.length == 0) {
-                console.log("debes ingresar contenido")
-            }else{
-                let users = this.loadInitialData()
-                
-                if ( users[0].inputEmail == email) {
-                    console.log("es igual");
-                } else {
-                    console.log("no es igual");
-                }
-
+            if (email.length == 0 && pass.length == 0) {
+                console.log("debes ingresar contenido");
+            } else {
+                let users = this.loadInitialData();
+                const usuariosEncontrados = users.find(
+                    (usuario) =>
+                        usuario.inputEmail === email &&
+                        usuario.inputPassword === pass,
+                );
+                if (usuariosEncontrados) {} else {}
             }
         } catch (error) {
             console.error(error);
