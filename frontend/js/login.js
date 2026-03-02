@@ -1,33 +1,65 @@
 // formulario
-const userFrom = document.querySelector("#user") 
+const userFrom = document.querySelector("#user");
 // inputs del login
-const inputEmail = document.querySelector("#exampleInputEmail") 
-const exampleInputPassword = document.querySelector("#exampleInputPassword") 
-// cajita que dice Remember Me 
-const customCheck = document.querySelector("#customCheck") 
+const inputEmail = document.querySelector("#exampleInputEmail");
+const inputPassword = document.querySelector("#exampleInputPassword");
+// cajita que dice Remember Me
+const customCheck = document.querySelector("#customCheck");
 // boton del login
-const btnLogin = document.querySelector("#btnLogin")
+const btnLogin = document.querySelector("#btnLogin");
 
 document.addEventListener("DOMContentLoaded", () => {
-    let login = new Login()
-    login.InitLogin()
-})
+    let login = new Login();
+    login.InitLogin();
+});
+
+if (btnLogin) {
+    btnLogin.addEventListener("click", () => {
+        let login = new Login();
+        console.log(inputEmail.value);
+        
+        login.valideUserLogin(inputEmail.value)
+    });
+}
 
 class Login {
     constructor() {
-        
-        this.InitLogin()
+        this.users = [];
+        this.storageKeyUsers = "users";
+        // this.InitLogin();
     }
 
-    // funcion que carga esta logica 
-    InitLogin(){
-        this.loadInitialData()
+    // funcion que carga esta logica
+    InitLogin() {
+        this.loadInitialData();
     }
 
     // funcion que trae y retorna todos los usuarios registrados
-    loadInitialData(){
-        let users = JSON.parse(localStorage.getItem("users"))
-        console.log("datos obtenidos " , users)
-        return users
+    loadInitialData() {
+        this.users = JSON.parse(localStorage.getItem(this.storageKeyUsers));
+        console.log("datos obtenidos ", this.users);
+        return this.users;
+    }
+
+    // funcion que valida el email y pass ingresados con los ya registrados
+    valideUserLogin(email) {
+        try {
+            console.log("email recibido " , email);
+            
+            if (email.length == 0) {
+                console.log("debes ingresar contenido")
+            }else{
+                let users = this.loadInitialData()
+                
+                if ( users[0].inputEmail == email) {
+                    console.log("es igual");
+                } else {
+                    console.log("no es igual");
+                }
+
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
