@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 if (btnLogin) {
     btnLogin.addEventListener("click", () => {
         let login = new Login();
-        console.log(inputEmail.value);
 
         login.valideUserLogin(inputEmail.value, inputPassword.value);
     });
@@ -51,9 +50,11 @@ class Login {
                 const usuariosEncontrados = users.find(
                     (usuario) =>
                         usuario.inputEmail === email &&
-                        usuario.inputPassword === pass,
+                        usuario.inputPassword === pass
                 );
-                if (usuariosEncontrados) {} else {}
+                if (usuariosEncontrados) {
+                    window.location.href = "index.html";
+                } else {}
             }
         } catch (error) {
             console.error(error);
