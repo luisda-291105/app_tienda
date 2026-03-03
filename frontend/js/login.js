@@ -67,4 +67,6 @@ function MostrarUsuarioDashboard(user){
     console.log("usuario que inicio seccion");
     console.table(user)
     localStorage.setItem("userFound" , JSON.stringify(user))
+    localStorage.setItem("usuarioLogueado" , "true")
+    // localStorage.setItem("autenticado" , "true")
 }
